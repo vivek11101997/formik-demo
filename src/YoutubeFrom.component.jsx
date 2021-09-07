@@ -29,6 +29,7 @@ const YoutubeFrom = () => {
     name: Yup.string().required("Required"),
     email: Yup.string().email("invalid Email Format").required("Required"),
     channel: Yup.string().required("Required"),
+    address: Yup.string().required("Required"),
   });
 
   //console.log(formik.touched);
@@ -50,6 +51,20 @@ const YoutubeFrom = () => {
         <label htmlFor="name">Channel</label>
         <Field type="text" id="channel" name="channel" />
         <ErrorMessage name="channel" />
+
+        <label htmlFor="name">Address</label>
+        <Field name="address">
+          {(props) => {
+            const { field, form, meta } = props;
+            console.log(props);
+            return (
+              <div>
+                <input type="text" id="address" {...field} />
+                {meta.touched && meta.error ? <div>{meta.error}</div> : null}
+              </div>
+            );
+          }}
+        </Field>
         <button type="submit">Submit</button>
       </Form>
     </Formik>
