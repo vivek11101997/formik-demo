@@ -1,9 +1,9 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
 import React from "react";
 import * as Yup from "yup";
 
 const YoutubeFrom = () => {
-  const initialValues = { name: "", email: "", channel: "" };
+  const initialValues = { name: "", email: "", channel: "", phNumbers: [""] };
   const onSubmit = (values) => {};
   // const validate = (values) => {
   //   let errors = {};
@@ -50,6 +50,36 @@ const YoutubeFrom = () => {
         <label htmlFor="name">Channel</label>
         <Field type="text" id="channel" name="channel" />
         <ErrorMessage name="channel" />
+
+        <div>
+          <label>List of Phone number</label>
+          <FieldArray name="phNumbers">
+            {(FieldArrayProps) => {
+              const { push, remove, form } = FieldArrayProps;
+              const { values } = form;
+              const { phNumbers } = values;
+              // {
+              //   !phNumbers && <div className="loading">Loading...</div>;
+              // }
+              return (
+                <div>
+                  {phNumbers.map((_, index) => (
+                    <div key={index}>
+                      <Field type="text" name={`phNumbers[${index}]`} />
+                      <button type="button" onClick={() => remove(index)}>
+                        -
+                      </button>
+                      <button type="button" onClick={() => push(" ")}>
+                        +
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              );
+            }}
+          </FieldArray>
+        </div>
+
         <button type="submit">Submit</button>
       </Form>
     </Formik>
