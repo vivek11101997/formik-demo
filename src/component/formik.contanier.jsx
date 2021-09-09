@@ -1,17 +1,33 @@
 import React from "react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
-import { values } from "lodash";
 import FormikControl from "./FormikControl";
 
 function FormikContanier() {
+  const dropdownOptions = [
+    { key: "Select An Role", value: "" },
+    { key: "Admin", value: "Admin" },
+    { key: "Super Admin", value: "Super Admin" },
+    { key: "Supervisor", value: "Supervisor" },
+    { key: "Operator", value: "Operator" },
+  ];
+
+  const radioOptions = [
+    { key: "Male", value: "Male" },
+    { key: "Female", value: "Female" },
+    { key: "Other", value: "Other" },
+  ];
   const initialValues = {
     email: "",
     description: "",
+    selectOption: "",
+    radioOption: "",
   };
   const validationSchema = Yup.object({
     email: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
+    selectOption: Yup.string().required("Required"),
+    radioOption: Yup.string().required("Required"),
   });
   const onSubmit = (values) => console.log(values);
   return (
@@ -34,6 +50,21 @@ function FormikContanier() {
             label="Description"
             name="description"
           />
+
+          <FormikControl
+            control="select"
+            label="Select Role"
+            name="selectOption"
+            options={dropdownOptions}
+          />
+
+          <FormikControl
+            control="radio"
+            label="Select Gender"
+            name="radioOption"
+            options={radioOptions}
+          />
+
           <button type="submit">Submit</button>
         </Form>
       )}
