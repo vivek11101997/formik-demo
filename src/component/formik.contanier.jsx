@@ -22,12 +22,14 @@ function FormikContanier() {
     description: "",
     selectOption: "",
     radioOption: "",
+    birthDate: null,
   };
   const validationSchema = Yup.object({
     email: Yup.string().required("Required"),
     description: Yup.string().required("Required"),
     selectOption: Yup.string().required("Required"),
     radioOption: Yup.string().required("Required"),
+    birthDate: Yup.date().required("Required").nullable(),
   });
   const onSubmit = (values) => console.log(values);
   return (
@@ -63,6 +65,15 @@ function FormikContanier() {
             label="Select Gender"
             name="radioOption"
             options={radioOptions}
+          />
+
+          <FormikControl control="date" label="Pick a date" name="birthDate " />
+
+          <FormikControl
+            control="chakraInput"
+            type="email"
+            label="Email"
+            name="email"
           />
 
           <button type="submit">Submit</button>

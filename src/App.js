@@ -1,11 +1,15 @@
 import "./App.css";
 import FormikContanier from "./component/formik.contanier";
 
+import { theme, ThemeProvider } from "@chakra-ui/react";
+
 function App() {
   return (
-    <div className="App">
-      <FormikContanier />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <FormikContanier />
+      </div>
+    </ThemeProvider>
   );
 }
 
